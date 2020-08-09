@@ -10,14 +10,14 @@ install_requirements(){
 	sudo su
 }
 
-firewall(){
-# Open 8080 port to reach web app from the host machine
-	sudo yum install firewalld
-	sudo systemctl enable firewalld
-	sudo systemctl start firewalld
-	sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
-	sudo firewall-cmd --reload
-}
+# firewall(){
+# # Open 8080 port to reach web app from the host machine
+	# sudo yum install firewalld
+	# sudo systemctl enable firewalld
+	# sudo systemctl start firewalld
+	# sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
+	# sudo firewall-cmd --reload
+# }
 
 install_maven() {
 
@@ -50,13 +50,13 @@ clone_edit_config() {
 	
 	sudo sed -i -e "s|localhost:3306/eschool|192.168.63.10:3306/eschool|g" /home/Java/eSchool/src/main/resources/application.properties
 	sudo sed -i -e "s/DATASOURCE_USERNAME:root/DATASOURCE_USERNAME:eschool/g" /home/Java/eSchool/src/main/resources/application.properties
-	sudo sed -i -e "s/DATASOURCE_PASSWORD:root/DATASOURCE_PASSWORD:cossack/g" /home/Java/eSchool/src/main/resources/application.properties
+	sudo sed -i -e "s/DATASOURCE_PASSWORD:root/DATASOURCE_PASSWORD:1234/g" /home/Java/eSchool/src/main/resources/application.properties
 	sudo sed -i -e "s|https://fierce-shore-32592.herokuapp.com|http://192.168.63.15:8080|g" /home/Java/eSchool/src/main/resources/application.properties
 	
 
 	sudo sed -i -e "s|35.240.41.176:8443|192.168.63.15:8080|g" /home/Java/eSchool/src/main/resources/application-production.properties
 	sudo sed -i -e "s/DATASOURCE_USERNAME:root/DATASOURCE_USERNAME:eschool/g" /home/Java/eSchool/src/main/resources/application-production.properties
-	sudo sed -i -e "s/DATASOURCE_PASSWORD:CS5eWQxnja0lAESd/DATASOURCE_PASSWORD:cossack/g" /home/Java/eSchool/src/main/resources/application-production.properties
+	sudo sed -i -e "s/DATASOURCE_PASSWORD:CS5eWQxnja0lAESd/DATASOURCE_PASSWORD:1234/g" /home/Java/eSchool/src/main/resources/application-production.properties
 	sudo sed -i -e "s|35.242.199.77:3306/ejournal|192.168.63.10:3306/eschool|g" /home/Java/eSchool/src/main/resources/application-production.properties
 
 }
@@ -73,7 +73,7 @@ build_backend_and_run() {
 	
 
 install_requirements
-firewall
+#firewall
 install_maven
 setup_maven
 clone_edit_config
